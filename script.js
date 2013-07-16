@@ -1,3 +1,6 @@
+	var nrObstacles;
+	var nrJumps = 3;
+
 $(document).ready(function(){
 	createGamePlan();
 	addObstacles();
@@ -25,6 +28,13 @@ $(document).ready(function(){
 			if(top<576){
 				moveTo($player, (top+64), left);
 			}
+		} 
+	});
+
+	$(document).keydown(function(e){
+		if(e.keyCode == 32){	//Space Bar
+			console.log('spacig');
+			jump();
 		}
 	});
  
@@ -45,9 +55,13 @@ function addObstacles(){
 			max = parseInt(prompt('That is too many, please choose again'));
 		}
 
+		nrObstacles = max;
+
 		for (var i=0; i<max; i++){
 			$('div#obstacles').append('<div class="obstacle"></div>');
 		}
+
+		$('#nrObstacles').html(nrObstacles);
 }
 
 function setObstacles(){
@@ -72,7 +86,7 @@ function setObstacles(){
 }
 
 var width = 60;
-var border = 4;
+var border = 4;	//2*2
 
 function getPixels(x,y){
 	return{
@@ -87,5 +101,51 @@ function moveTo($obstacle, newTop, newLeft){
 }
 
 function setPlayer(){
-	$('div#playground').append('<div id="player"></div>');
+	$('div#playground').append('<div id="player" class="walking"></div>');
 }
+
+function jump(){
+	$('#player').addClass('jumping').removeClass('walking');
+	setTimeout(function(){$('#player').addClass('walking').removeClass('jumping');}, 250);
+	if(onObstacle()){
+		nrJumps--;
+		if(nrJumps === 0){
+			removeObstacle();
+		}
+	}
+}
+
+function removeObstacle(){
+	nrJumps = 3;
+	nrObstacles--;
+	$('#nrObstacles').html(nrObstacles);
+	if(nrObstacles === 0){
+		alert('Congratulations! You have removed all obstacles.');
+	}
+}
+
+function onObstacle(){
+	var obstaclesLeft = $('.obstacles').map(function(){
+		return $(this).position.left;
+	}).get();
+
+	var obstaclesTop = $('.obstacles').map(function(){
+		return $(this).position.top;
+	}).get();
+
+	var left = $('#player').position().left;
+	var top = $('#player').position().top;
+
+	var compareLeft = $.inArray(left, obstaclesLeft);
+	var compareTop = $.inArray(top, obstaclesTop);
+
+	if(compareLeft > -1 && compareTop > -1){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
+
+
