@@ -1,5 +1,6 @@
 	var nrObstacles;
 	var nrJumps = 3;
+	var $obstacle;
 
 $(document).ready(function(){
 	createGamePlan();
@@ -119,31 +120,24 @@ function removeObstacle(){
 	nrJumps = 3;
 	nrObstacles--;
 	$('#nrObstacles').html(nrObstacles);
+	$obstacle.remove();
 	if(nrObstacles === 0){
 		alert('Congratulations! You have removed all obstacles.');
 	}
 }
 
 function onObstacle(){
-	var obstaclesLeft = $('.obstacles').map(function(){
-		return $(this).position.left;
-	}).get();
 
-	var obstaclesTop = $('.obstacles').map(function(){
-		return $(this).position.top;
-	}).get();
+	var left = $('#player').position().left + 2;
+	var top = $('#player').position().top + 2;
 
-	var left = $('#player').position().left;
-	var top = $('#player').position().top;
-
-	var compareLeft = $.inArray(left, obstaclesLeft);
-	var compareTop = $.inArray(top, obstaclesTop);
-
-	if(compareLeft > -1 && compareTop > -1){
-		return true;
-	} else {
-		return false;
-	}
+	for(var i = 0; i< $('div.obstacle').length; i++){
+		if(left == $('div.obstacle:eq('+i+')').position().left && top == $('div.obstacle:eq('+i+')').position().top){
+			$obstacle = $('div.obstacle:eq('+i+')');
+			return true;
+		}
+	} 	
+	return false;
 }
 
 
