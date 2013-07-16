@@ -1,0 +1,62 @@
+/* playground */
+#playground{
+	width: 640px;
+	height: 640px;
+	border: 5px solid gray;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.square{
+	width: 60px;
+	height: 60px;
+	background-color: black;
+	display: inline-block;
+	float: left;
+	border: 2px solid gray;
+	margin: 0;
+	padding: 0;
+}
+
+#obstacles{
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	width: 640px;
+	height: 640px;
+}
+
+.obstacle{
+	width: 40px;
+	height: 40px;
+	background-color: white;
+	margin: 10px;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	-webkit-box-shadow: 0px 0px 3px #666;
+       -moz-box-shadow: 0px 0px 3px #666;
+            box-shadow: 0px 0px 3px #666;
+    
+    -webkit-border-radius:16px;
+       -moz-border-radius:16px;
+            border-radius:16px;
+}
+
+#player{
+	width: 40px;
+	height: 40px;
+	background-color: hotpink;
+	margin: 10px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	-webkit-box-shadow: 0px 0px 3px #666;
+       -moz-box-shadow: 0px 0px 3px #666;
+            box-shadow: 0px 0px 3px #666;
+    
+    -webkit-border-radius:16px;
+       -moz-border-radius:16px;
+            border-radius:16px;
+}
