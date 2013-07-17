@@ -3,10 +3,8 @@
 	var $obstacle;
 
 $(document).ready(function(){
-	createGamePlan();
-	addObstacles();
-	setObstacles();
-	setPlayer();
+
+	playGame();
 
 	$(document).keydown(function(e){
 		var $player = $('#player');
@@ -38,8 +36,26 @@ $(document).ready(function(){
 			jump();
 		}
 	});
+
+	$('#play').click(function(){
+		reset();
+		playGame();
+	});
  
 });
+
+function playGame(){
+	createGamePlan();
+	addObstacles();
+	setObstacles();
+	setPlayer();
+}
+
+function reset(){
+	$('.square').remove();
+	$('.obstacle').remove();
+	$('#player').remove();
+}
 
 function createGamePlan(){
 	for(var i = 0; i < 100; i++){
