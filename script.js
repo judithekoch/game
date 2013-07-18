@@ -3,6 +3,7 @@
 	var $obstacle;
 
 $(document).ready(function(){
+	$(document).focus();
 
 	playGame();
 
